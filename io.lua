@@ -38,7 +38,7 @@ function ioRelaySwitch(state)
     end
     gpio.write(config.io.relay_pin, gpioLevel)
     gpio.write(config.io.led_green_pin, gpioLevel == gpio.LOW and gpio.HIGH or gpio.LOW)
-    mqttMessage(config.mqtt.topic_relay, gpioLevel == gpio.LOW and 'ON' or 'OFF')
+    mqttMessage(config.mqtt.topic_relay, gpioLevel == gpio.HIGH and 'ON' or 'OFF')
 end
 
 gpio.mode(config.io.relay_pin, gpio.OUTPUT)
