@@ -1,15 +1,16 @@
 relayState = 0
 ttp223LastClick = 0
+ttp223LastDoubleClick = 0
 
 function ioButtonInterrupt()
-    print("Interrupt")
+    print("Button interrupt")
     if (gpio.read(config.io.button_pin) == gpio.LOW) then
         tmr.delay(config.io.button_delay_short_click_us)
-        print("Short delay complete")
+        print("Button short delay complete")
         if (gpio.read(config.io.button_pin) == gpio.LOW) then
             local clickType = 1
             tmr.delay(config.io.button_delay_long_click_us)
-            print("Long delay complete")
+            print("Button long delay complete")
             if (gpio.read(config.io.button_pin) == gpio.LOW) then
                 clickType = 2
             end
@@ -29,13 +30,16 @@ end
 
 function ioButtonInterruptTTP223()
     print("TTP223 interrupt")
-    if (tmr.now() - ttp223LastClick < config.io.ttp223_delay_dbl_click_us) then
-        mqttMessage(config.mqtt.topic_button, 2)
+    if mr.now() - ttp223LastClick < config.io.ttp223_delay_dbl_click_us then
+        if tmr.now() - ttp223LastDoubleClick > config.io.ttp223_delay_dbl_click_us then
+            mqttMessage(config.mqtt.topic_button, 2)
+            ttp223LastDoubleClick = tmr.now()
+        end
     else
         mqttMessage(config.mqtt.topic_button, 1)
         ioRelaySwitch()
+        ttp223LastClick = tmr.now()
     end
-    ttp223LastClick = tmr.now()
 end
 
 function ioRelaySwitch(state)

@@ -10,7 +10,7 @@ config = {
     },
     io = {
         ttp223_pin                  = 5,
-        ttp223_delay_dbl_click_us   = 500000,
+        ttp223_delay_dbl_click_us   = 700000,
         button_pin                  = 3,
         relay_pin                   = 6,
         led_green_pin               = 7,
