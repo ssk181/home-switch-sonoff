@@ -8,16 +8,15 @@ config = {
     collectgarbage = {
         ticks = 10
     },
-    dht = {
-        pin = nil -- GPIO pin index or nil if disabled (5 for SONOFF)
-    },
     io = {
+        ttp223_pin                  = 5,
+        ttp223_delay_dbl_click_us   = 500000,
         button_pin                  = 3,
         relay_pin                   = 6,
         led_green_pin               = 7,
         button_delay_short_click_us = 20000,
         button_delay_long_click_us  = 500000,
-        buttin_delay_debounce_us    = 50000,
+        button_delay_debounce_us    = 50000,
         relay_on_short_click        = 1,
         relay_on_long_click         = 1
     },

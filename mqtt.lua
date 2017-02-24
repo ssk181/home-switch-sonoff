@@ -58,12 +58,6 @@ function mqttConnect(firstReconnect)
                     if relaySet ~= nil then
                         pcall(ioRelaySwitch, relaySet)
                     end
-                -- climate temp
-                elseif topic_main == config.mqtt.topic_climate_temp then
-                    mqttClimateSend(config.mqtt.topic_climate_temp)
-                -- climate humidity
-                elseif topic_main == config.mqtt.topic_climate_humidity then
-                    mqttClimateSend(config.mqtt.topic_climate_humidity)
                 -- state uptime
                 elseif topic_main == config.mqtt.topic_state_uptime then
                     mqttMessage(config.mqtt.topic_state_uptime, tmr.time())
@@ -121,22 +115,6 @@ function mqttQueueSend()
             mqttMessage(msg["topic"], msg["message"])
         else
             i = i + 1
-        end
-    end
-end
-
-function mqttClimateSend(topic)
-    if topic == config.mqtt.topic_climate_temp or topic == config.mqtt.topic_climate_humidity then
-        if mqttClimate["temp"] == nil or tmr.time() - mqttClimate["time"] > config.mqtt.climate_cache_sec then
-            local climate = require("climate")
-            local error, temp,  humidity= climate.get()
-            mqttClimate["temp"]     = temp
-            mqttClimate["humidity"] = humidity
-            mqttClimate["time"]     = tmr.time()
-        end
-        local data = topic == config.mqtt.topic_climate_temp and mqttClimate["temp"] or mqttClimate["humidity"]
-        if data ~= nil then
-            mqttMessage(topic, data)
         end
     end
 end

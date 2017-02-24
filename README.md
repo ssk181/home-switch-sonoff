@@ -4,6 +4,7 @@
 ![Board](pic/board.jpg "Board")
 ![Scheme](pic/scheme.jpg "Scheme")
 ![Connect](pic/connect.jpg "Connect")
+![TTP223](pic/ttp223.jpg "TTP223")
 
 FTDI | Sonoff (from top to bottom)
 --- | ---
@@ -23,16 +24,14 @@ Spare (pin 5) | 14 | 5
 
 ## Hardware
 - Itead Sonoff
-- DHT11 or DHT22
+- TTP223 sensor module
 
 ## MQTT
 Outgoing messages
 
 - /home/iot/{Device-IP}/out/online               *- ON - connectted to MQTT, OFF - disconnected (LWT)*
-- /home/iot/{Device-IP}/out/button               *- 1 - short press, 2 - long press*
+- /home/iot/{Device-IP}/out/button               *- 1 - short press, 2 - long press (or double click to TTP223)*
 - /home/iot/{Device-IP}/out/relay                *- ON or OFF*
-- /home/iot/{Device-IP}/out/climate/temp         *- Temperature*
-- /home/iot/{Device-IP}/out/climate/humidity     *- Humidity*
 - /home/iot/{Device-IP}/out/state/uptime         *- Up time in seconds*
 - /home/iot/{Device-IP}/out/state/memory         *- Free memory in bytes*
 
