@@ -17,7 +17,7 @@ config = {
         led_green_pin               = 7,
         button_delay_short_click_us = 20000,
         button_delay_long_click_us  = 500000,
-        buttin_delay_debounce_us    = 50000,
+        button_delay_debounce_us    = 50000,
         relay_on_short_click        = 1,
         relay_on_long_click         = 1
     },

@@ -16,11 +16,12 @@ function ioButtonInterrupt()
             if (clickType == 2 and config.io.relay_on_long_click == 1) or
                (clickType == 1 and config.io.relay_on_short_click == 1)
             then
+                mqttMessage(config.mqtt.topic_button, clickType)
                 ioRelaySwitch()
             end
         end
         while gpio.read(config.io.button_pin) == gpio.LOW do
-            tmr.delay(config.io.buttin_delay_debounce_us)
+            tmr.delay(config.io.button_delay_debounce_us)
         end
     end
 end
