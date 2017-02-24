@@ -47,3 +47,12 @@ Input messages
 2. Install nodemcu-tool:
    *npm install nodemcu-tool -g*
 3. Run *./upload.sh* to upload code
+
+# Example with IKEA lamp
+
+![Ikea-1](pic/ikea1.jpg "Ikea-1")
+![Ikea-2](pic/ikea2.jpg "Ikea-2")
+![Ikea-3](pic/ikea3.jpg "Ikea-3")
+
+Video:
+https://www.youtube.com/watch?v=e1sOa8Fj5I0
