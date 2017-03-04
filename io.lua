@@ -16,7 +16,6 @@ function ioButtonInterrupt()
             if (clickType == 2 and config.io.relay_on_long_click == 1) or
                (clickType == 1 and config.io.relay_on_short_click == 1)
             then
-                mqttMessage(config.mqtt.topic_button, clickType)
                 ioRelaySwitch()
             end
         end
