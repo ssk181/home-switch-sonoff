@@ -8,15 +8,17 @@ function ioInterrupt(type)
         pin_state_active = gpio.HIGH
         delay_short = config.io.ttp223_delay_short_click_us
         delay_long = config.io.ttp223_delay_long_click_us
+        stateDown = ttp223StatDown
     else
         pin = config.io.button_pin
         pin_state_active = gpio.LOW        
         delay_short = config.io.button_delay_short_click_us
         delay_long = config.io.button_delay_long_click_us
+        stateDown = buttonStateDown
     end
 
     print("IO interrupt: " .. type)
-    if (gpio.read(pin) == pin_state_active) then
+    if (stateDown == 0 and gpio.read(pin) == pin_state_active) then
         if type == "ttp223" then
             buttonStateDown = 1
         else
