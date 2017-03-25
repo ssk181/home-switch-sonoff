@@ -69,7 +69,9 @@ end
 
 function ioTTP223Up(doContinue)
     if doContinue == nil then
-        tmr.alarm(config.io.ttp223_up_tmr_alarmd_id, config.io.ttp223_up_check_ms, tmr.ALARM_AUTO, ioTTP223Up)
+        tmr.alarm(config.io.ttp223_up_tmr_alarmd_id, config.io.ttp223_up_check_ms, tmr.ALARM_AUTO, function()
+            ioTTP223Up(true)
+        end)
     end
     if gpio.read(config.io.ttp223_pin) ~= gpio.HIGH then
         ttp223StatDown = 0
