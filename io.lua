@@ -57,7 +57,9 @@ end
 
 function ioButtonUp(doContinue)
     if doContinue == nil then
-        tmr.alarm(config.io.button_up_tmr_alarmd_id, config.io.button_up_check_ms, tmr.ALARM_AUTO, ioButtonUp)
+        tmr.alarm(config.io.button_up_tmr_alarmd_id, config.io.button_up_check_ms, tmr.ALARM_AUTO, function()
+            ioButtonUp(true)
+        end)
     end
     if gpio.read(config.io.button_pin) ~= gpio.LOW then
         buttonStateDown = 0
