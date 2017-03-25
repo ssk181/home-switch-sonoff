@@ -1,4 +1,6 @@
 relayState = 0
+buttonStateDown = 0
+ttp223StatDown = 0
 
 function ioInterrupt(type)
     if type == "ttp223" then
@@ -15,6 +17,11 @@ function ioInterrupt(type)
 
     print("IO interrupt: " .. type)
     if (gpio.read(pin) == pin_state_active) then
+        if type == "ttp223" then
+            buttonStateDown = 1
+        else
+            ttp223StatDown = 1
+        end
         tmr.delay(delay_short)
         print("Short delay complete: " .. type)
         if (gpio.read(pin) == pin_state_active) then
@@ -31,8 +38,11 @@ function ioInterrupt(type)
                 ioRelaySwitch()
             end
         end
-        while gpio.read(pin) == pin_state_active do
-            tmr.delay(config.io.button_delay_debounce_us)
+
+        if type == "ttp223" then
+            ioTTP223Up()
+        else
+            ioButtonUp()
         end
     end
 end
@@ -43,6 +53,26 @@ end
 
 function ioInterruptTTP223()
     ioInterrupt("ttp223")
+end
+
+function ioButtonUp(doContinue)
+    if doContinue == nil then
+        tmr.alarm(config.io.button_up_tmr_alarmd_id, config.io.button_up_check_ms, tmr.ALARM_AUTO, ioButtonUp)
+    end
+    if gpio.read(config.io.button_pin) ~= gpio.LOW then
+        buttonStateDown = 0
+        tmr.unregister(config.io.button_up_tmr_alarmd_id)
+    end
+end
+
+function ioTTP223Up(doContinue)
+    if doContinue == nil then
+        tmr.alarm(config.io.ttp223_up_tmr_alarmd_id, config.io.ttp223_up_check_ms, tmr.ALARM_AUTO, ioTTP223Up)
+    end
+    if gpio.read(config.io.ttp223_pin) ~= gpio.HIGH then
+        ttp223StatDown = 0
+        tmr.unregister(config.io.button_up_tmr_alarmd_id)
+    end
 end
 
 function ioRelaySwitch(state)
