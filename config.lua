@@ -12,14 +12,15 @@ config = {
         pin = nil -- GPIO pin index or nil if disabled (5 for SONOFF)
     },
     io = {
+        relay_on_short_click        = 1,
+        relay_on_long_click         = 1,
         button_pin                  = 3,
         relay_pin                   = 6,
         led_green_pin               = 7,
         button_delay_short_click_us = 20000,
         button_delay_long_click_us  = 500000,
-        button_delay_debounce_us    = 50000,
-        relay_on_short_click        = 1,
-        relay_on_long_click         = 1
+        button_up_tmr_alarmd_id     = 3,
+        button_up_check_ms          = 500
     },
     mqtt = {
         broker_ip      = "192.168.182.2",

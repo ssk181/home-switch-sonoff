@@ -1,8 +1,10 @@
 relayState = 0
+buttonStateDown = 0
 
 function ioButtonInterrupt()
     print("Interrupt")
-    if (gpio.read(config.io.button_pin) == gpio.LOW) then
+    if (buttonStateDown == 0 and gpio.read(config.io.button_pin) == gpio.LOW) then
+        buttonStateDown = 1
         tmr.delay(config.io.button_delay_short_click_us)
         print("Short delay complete")
         if (gpio.read(config.io.button_pin) == gpio.LOW) then
@@ -19,9 +21,17 @@ function ioButtonInterrupt()
                 ioRelaySwitch()
             end
         end
-        while gpio.read(config.io.button_pin) == gpio.LOW do
-            tmr.delay(config.io.button_delay_debounce_us)
-        end
+        ioButtonUp()
+    end
+end
+
+function ioButtonUp(doContinue)
+    if doContinue == nil then
+        tmr.alarm(config.io.button_up_tmr_alarmd_id, config.io.button_up_check_ms, tmr.ALARM_AUTO, ioButtonUp)
+    end
+    if gpio.read(config.io.button_pin) ~= gpio.LOW then
+        buttonStateDown = 0
+        tmr.unregister(config.io.button_up_tmr_alarmd_id)
     end
 end
 
