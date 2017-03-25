@@ -77,7 +77,7 @@ function ioTTP223Up(doContinue)
     end
     if gpio.read(config.io.ttp223_pin) ~= gpio.HIGH then
         ttp223StatDown = 0
-        tmr.unregister(config.io.button_up_tmr_alarmd_id)
+        tmr.unregister(config.io.ttp223_up_tmr_alarmd_id)
     end
 end
 
