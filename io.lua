@@ -20,9 +20,9 @@ function ioInterrupt(type)
     print("IO interrupt: " .. type)
     if (stateDown == 0 and gpio.read(pin) == pin_state_active) then
         if type == "ttp223" then
-            buttonStateDown = 1
-        else
             ttp223StatDown = 1
+        else
+            buttonStateDown = 1
         end
         tmr.delay(delay_short)
         print("Short delay complete: " .. type)

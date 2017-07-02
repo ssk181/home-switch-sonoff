@@ -21,8 +21,8 @@ config = {
         ttp223_delay_long_click_us  = 1000000,
         button_up_tmr_alarmd_id     = 3,
         button_up_check_ms          = 500,
-        ttp223__up_tmr_alarmd_id    = 4,
-        ttp223__up_check_ms         = 500
+        ttp223_up_tmr_alarmd_id    = 4,
+        ttp223_up_check_ms         = 500
     },
     mqtt = {
         broker_ip      = "192.168.182.2",
