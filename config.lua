@@ -39,6 +39,7 @@ config = {
         topic_relay    = "relay",
         topic_state_uptime = "state/uptime",
         topic_state_memory = "state/memory",
+        topic_state_relay      = "state/relay",
         topic          = "/home/iot",
         dir_in         = "in",
         dir_out        = "out",
