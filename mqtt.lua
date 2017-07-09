@@ -70,6 +70,9 @@ function mqttConnect(firstReconnect)
                 -- state memory
                 elseif topic_main == config.mqtt.topic_state_memory then
                     mqttMessage(config.mqtt.topic_state_memory, node.heap())
+                -- state relay
+                elseif topic_main == config.mqtt.topic_state_relay then
+                    pcall(ioSendState)
                 end
 
                 collectgarbageCounter = collectgarbageCounter + 1
