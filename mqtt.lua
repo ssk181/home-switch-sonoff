@@ -35,6 +35,7 @@ function mqttConnect(firstReconnect)
                     print("MQTT subscribe")
                 end)
                 mqttMessage(config.mqtt.topic_online, config.mqtt.msg_on)
+                pcall(ioSendState)
                 mqttConnected = true
                 print("MQTT connected success")
                 mqttQueueSend()
