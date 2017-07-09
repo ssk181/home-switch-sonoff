@@ -35,6 +35,7 @@ Outgoing messages
 - /home/iot/{Device-IP}/out/climate/humidity     *- Humidity*
 - /home/iot/{Device-IP}/out/state/uptime         *- Up time in seconds*
 - /home/iot/{Device-IP}/out/state/memory         *- Free memory in bytes*
+- /home/iot/{Device-IP}/out/state/relay          *- Relay status ON or OFF*
 
 Input messages
 - /home/iot/{Device-IP}/in/relay                *- ON | OFF | INVERT*
@@ -42,6 +43,7 @@ Input messages
 - /home/iot/{Device-IP}/in/climate/humidity     *No message*
 - /home/iot/{Device-IP}/in/state/uptime         *No message*
 - /home/iot/{Device-IP}/in/state/memory         *No message*
+- /home/iot/{Device-IP}/in/state/relay          *No message*
 
 ## Installation
 1. Install integer NodeMCU formware with modules: *dht, file, gpio, mqtt, net, node, tmr, uart, wifi* (http://nodemcu-build.com/)

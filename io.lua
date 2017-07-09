@@ -54,7 +54,7 @@ function ioRelaySwitch(state)
 end
 
 function ioSendState()
-    mqttMessage(config.mqtt.topic_state_relay .. "/" .. i, relayState == 1 and 'ON' or 'OFF')
+    mqttMessage(config.mqtt.topic_state_relay, relayState == 1 and 'ON' or 'OFF')
 end
 
 gpio.mode(config.io.relay_pin, gpio.OUTPUT)
